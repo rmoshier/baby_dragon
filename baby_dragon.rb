@@ -13,6 +13,7 @@ class Dragon
       "rock" => :rock
       }
     puts "Welcome to the world #{@name}!!"
+    puts "*" * 50
     puts "
                 ______ __
               { - - , \  |             *
@@ -71,23 +72,13 @@ class Dragon
 
   def run
     while @running == true
-      puts "*" * 100
+      puts "*" * 50
       puts "What would you like to do with #{@name}?"
       puts @action.keys.collect {|a| puts a.upcase + "?"}
-      puts "*" * 100
       input = gets.chomp
-      if input == "feed"
-        pet.feed
-      elsif input == "walk"
-        pet.walk
-      elsif input == "put to bed"
-        pet.put_to_bed
-      elsif input == "rock"
-        pet.rock
-      elsif input == "exit"
-        exit
-      else
-        puts "Please put one of the commands."
+      puts "*" * 50
+      if @action.keys.include?(input)
+        send @action[input]
       end
     end
   end
@@ -104,8 +95,8 @@ class Dragon
     if @tummy >= 0
       @tummy -= 1
       @bowels += 1
-      puts @tummy
-      puts @bowels
+      # puts @tummy
+      # puts @bowels
     else
       if @asleep
         @asleep = false
@@ -117,6 +108,7 @@ class Dragon
     if @bowels >= 10
       then @bowels = 0
       puts "#{@name} had an accident. Dragon poop EVERYWHERE."
+      exit
     end
     if hungry?
       if @asleep
@@ -132,22 +124,9 @@ class Dragon
       end
         puts "#{@name} does the potty dance..."
     end
-
   end
 end
 
 puts "What would you like to name your baby dragon?"
 name = gets.chomp
 pet = Dragon.new name
-
-
-# pet = Dragon.new 'Norbert'
-# pet.feed
-# pet.walk
-# pet.put_to_bed
-# pet.rock
-# pet.put_to_bed
-# pet.put_to_bed
-# pet.put_to_bed
-# pet.put_to_bed
-# pet.put_to_bed

@@ -1,17 +1,29 @@
 class Dragon
+
   def initialize(name)
     @name = name
     @tummy = 10
     @bowels = 0
     @asleep = false
-    @actions = {
-      "feed" => :feed
-      "walk" => :walk
-      "put to bed" => :put_to_bed
-
-
-    }
+    @running = true
+    @action = {
+      "feed" => :feed,
+      "walk" => :walk,
+      "put to bed" => :put_to_bed,
+      "rock" => :rock
+      }
     puts "Welcome to the world #{@name}!!"
+    puts "
+                ______ __
+              { - - , \  |             *
+               '-__   \\ |  (\___     **
+                    ` \\ | {/ ^ _) < ***
+              - .^^^^^^^^^^^  /      **
+            / /\\    )____,   /        *
+        . _' /  \\<--       \\\<
+      `^^^^^`    ^^^        ^^
+    "
+    run
   end
 
   def feed
@@ -57,6 +69,29 @@ class Dragon
 
   private
 
+  def run
+    while @running == true
+      puts "*" * 100
+      puts "What would you like to do with #{@name}?"
+      puts @action.keys.collect {|a| puts a.upcase + "?"}
+      puts "*" * 100
+      input = gets.chomp
+      if input == "feed"
+        pet.feed
+      elsif input == "walk"
+        pet.walk
+      elsif input == "put to bed"
+        pet.put_to_bed
+      elsif input == "rock"
+        pet.rock
+      elsif input == "exit"
+        exit
+      else
+        puts "Please put one of the commands."
+      end
+    end
+  end
+
   def hungry?
     @tummy <= 2
   end
@@ -101,13 +136,18 @@ class Dragon
   end
 end
 
-pet = Dragon.new 'Norbert'
-pet.feed
-pet.walk
-pet.put_to_bed
-pet.rock
-pet.put_to_bed
-pet.put_to_bed
-pet.put_to_bed
-pet.put_to_bed
-pet.put_to_bed
+puts "What would you like to name your baby dragon?"
+name = gets.chomp
+pet = Dragon.new name
+
+
+# pet = Dragon.new 'Norbert'
+# pet.feed
+# pet.walk
+# pet.put_to_bed
+# pet.rock
+# pet.put_to_bed
+# pet.put_to_bed
+# pet.put_to_bed
+# pet.put_to_bed
+# pet.put_to_bed
